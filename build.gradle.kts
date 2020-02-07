@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.*
 
 plugins {
     kotlin("multiplatform")
+    kotlin("plugin.serialization")
     `maven-publish`
 }
 
@@ -25,7 +26,7 @@ kotlin {
     }
 
     targets.withType<KotlinNativeTarget>().matching { it != commonNative }.all {
-        compilations.all {
+        compilations.getByName("main") {
             if (!target.publishable) {
                 defaultSourceSet.kotlin.setSrcDirs(emptyList<Any>())
             }
@@ -35,7 +36,6 @@ kotlin {
             }
         }
     }
-
 
     with(commonNative) {
         val main by compilations
