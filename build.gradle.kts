@@ -18,6 +18,8 @@ kotlin {
         }
     }
 
+    commonPosix()
+
     linuxX64()
     macosX64()
     mingwX64 {
